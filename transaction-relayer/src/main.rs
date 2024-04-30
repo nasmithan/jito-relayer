@@ -358,7 +358,7 @@ fn main() {
     );
 
     if let Some(ipfee_host) = &args.ipfee_host {
-        txingest_connect(ipfee_host.as_str());
+        ipfee_connect(ipfee_host.as_str());
     }
 
     // Supporting IPV6 addresses is a DOS vector since they are cheap and there's a much larger amount of them.
