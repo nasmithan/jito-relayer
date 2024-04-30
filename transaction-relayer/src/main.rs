@@ -44,6 +44,7 @@ use solana_metrics::{datapoint_error, datapoint_info};
 use solana_net_utils::multi_bind_in_range;
 use solana_sdk::{
     address_lookup_table_account::AddressLookupTableAccount,
+    ipfee::ipfee_connect,
     pubkey::Pubkey,
     signature::{read_keypair_file, Signer},
 };
@@ -236,6 +237,10 @@ struct Args {
     ///  Format of the file: `staked_map_id: {<pubkey>: <SOL stake amount>}
     #[arg(long, env)]
     staked_nodes_overrides: Option<PathBuf>,
+
+    // ipfee host, will be sent ipfee messages
+    #[arg(long, env)]
+    ipfee_host: Option<String>,
 }
 
 #[derive(Debug)]
@@ -351,6 +356,10 @@ fn main() {
         !public_ip.is_loopback(),
         "Your public IP can't be the loopback interface"
     );
+
+    if let Some(ipfee_host) = &args.ipfee_host {
+        ipfee_connect(ipfee_host.as_str());
+    }
 
     // Supporting IPV6 addresses is a DOS vector since they are cheap and there's a much larger amount of them.
     // The DOS is specifically with regards to the challenges queue filling up and starving other legitimate
