@@ -57,20 +57,20 @@ serde = { version = "1.0.160", features = ["derive"] }
 serde_json = "1.0.96"
 serde_yaml = "0.9.32"
 sha2 = "0.10.6"
-solana-address-lookup-table-program = "=1.17.33"
-solana-client = "=1.17.33"
-solana-core = "=1.17.33"
-solana-gossip = "=1.17.33"
-solana-measure = "=1.17.33"
-solana-metrics = "=1.17.33"
-solana-net-utils = "=1.17.33"
-solana-perf = "=1.17.33"
-solana-program = "=1.17.33"
-solana-rayon-threadlimit = "=1.17.33"
-solana-runtime = "=1.17.33"
-solana-sdk = "=1.17.33"
-solana-streamer = "=1.17.33"
-solana-validator = "=1.17.33"
+solana-address-lookup-table-program = { path = "/path/to/your/jito-solana/programs/address-lookup-table" }
+solana-client = { path = "/path/to/your/jito-solana/client" }
+solana-core = { path = "/path/to/your/jito-solana/core" }
+solana-gossip = { path = "/path/to/your/jito-solana/gossip" }
+solana-measure = { path = "/path/to/your/jito-solana/measure" }
+solana-metrics = { path = "/path/to/your/jito-solana/metrics" }
+solana-net-utils = { path = "/path/to/your/jito-solana/net-utils" }
+solana-perf = { path = "/path/to/your/jito-solana/perf" }
+solana-program = { path = "/path/to/your/jito-solana/sdk/program" }
+solana-rayon-threadlimit = { path = "/path/to/your/jito-solana/rayon-threadlimit" }
+solana-runtime = { path = "/path/to/your/jito-solana/runtime" }
+solana-sdk = { path = "/path/to/your/jito-solana/sdk" }
+solana-streamer = { path = "/path/to/your/jito-solana/streamer" }
+solana-validator = { path = "/path/to/your/jito-solana/validator" }
 thiserror = "1.0.40"
 tikv-jemallocator = { version = "0.4", features = ["profiling"] }
 tokio = { version = "1.29.1", features = ["full"] }
@@ -82,6 +82,10 @@ tower = { version = "0.4.1", features = ["limit"] }
 [profile.release]
 # thin has minimal overhead vs none (default): https://blog.llvm.org/2016/06/thinlto-scalable-and-incremental-lto.html
 lto = "thin"
+
+[patch.crates-io]
+solana-program = { path = "/path/to/your/jito-solana/sdk/program" }
+solana-zk-token-sdk = { path = "/path/to/your/jito-solana/zk-token-sdk" }
 
 # enable debug symbols for profiling the heap using jeprof
 # example: jeprof --web target/release/jito-transaction-relayer jeprof.3085546.9823.i24.heap
